@@ -34,3 +34,13 @@ Request body:
 Response body:
 [{"word": "happy", "count": 3}]
 ```
+
+#### /comment-words
+* `POST` : Returns the word count in the submitted comment
+
+```
+Request body:
+{ "comment": "I find it ridiculous to limit me!"}
+Response body:
+{"count": 7}
+```

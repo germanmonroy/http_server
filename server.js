@@ -8,6 +8,7 @@ const server = http.createServer((req, res) => {
   if (req.url === "/user-agent") return respondU(req, res);
   if (req.url.match(/^\/b64\//)) return respondB(req, res);
   if (req.url === '/repetitive-word') return respondRepetitiveWord(req, res)
+  if (req.url === '/comment-words') return respondCommentWord(req, res)
 
   res.end();
 });
@@ -34,6 +35,18 @@ function respondRepetitiveWord (req, res) {
     const words = countWords(JSON.parse(body).text)
     res.setHeader('Content-Type', 'application/json')
     res.end(JSON.stringify(words))
+  })
+}
+
+function respondCommentWord (req, res) {
+  let body = ''
+  req.on('data', chunk => {
+    body += chunk.toString()
+  })
+  req.on('end', () => {
+    const comment = JSON.parse(body).comment
+    res.setHeader('Content-Type', 'application/json')
+    res.end(JSON.stringify({ count: comment.split(' ').length }))
   })
 }
 

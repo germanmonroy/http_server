@@ -41,9 +41,19 @@ tape('should respond repetitive-word', (t) => {
   }
   jsonist.post(`${urlBase}/repetitive-word`, data, (err, body) => {
     if (err) t.error(err)
-
     t.equal(body[0].count, 4)
     t.equal(body[0].word, 'happy')
+    t.end()
+  })
+})
+
+tape('should respond comment-words', (t) => {
+  const data = {
+    comment: 'If <branch> is specified, git rebase will perform an automatic git switch <branch> before doing anything else.'
+  }
+  jsonist.post(`${urlBase}/comment-words`, data, (err, body) => {
+    if (err) t.error(err)
+    t.equal(body.count, 17)
     t.end()
   })
 })

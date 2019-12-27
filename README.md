@@ -25,3 +25,12 @@ npm start
 
 #### /b64/*
 * `GET` : Returns a part of endpoint comming after 'b64/' encoded to base64 format
+
+#### /repetitive-word
+* `POST` : Returns repeated words count from the article
+```
+Request body:
+{ "text": "I felt happy because I saw the others were happy and because I knew I should feel happy"}
+Response body:
+[{"word": "happy", "count": 3}]
+```

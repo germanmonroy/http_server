@@ -35,6 +35,19 @@ tape("should respond b64", t => {
   });
 });
 
+tape('should respond repetitive-word', (t) => {
+  const data = {
+    text: 'I felt happy because I saw the others were happy and because I knew I should feel happy, but I wasn’t really happy.'
+  }
+  jsonist.post(`${urlBase}/repetitive-word`, data, (err, body) => {
+    if (err) t.error(err)
+
+    t.equal(body[0].count, 4)
+    t.equal(body[0].word, 'happy')
+    t.end()
+  })
+})
+
 tape("cleanup", function(t) {
   server.close();
   t.end();
